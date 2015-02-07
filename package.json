@@ -1,0 +1,30 @@
+{
+  "name": "while-promised",
+  "version": "1.0.0",
+  "description": "Loop asyncronous with Promises",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:6to5/register test/*Spec.js",
+    "build": "6to5 src --out-dir lib",
+    "pretest": "npm run build"
+  },
+  "keywords": [
+    "promise",
+    "async",
+    "while",
+    "loop"
+  ],
+  "author": "Jacob Carlsson <jacob.carlsson@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "6to5": "^3.4.0",
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0"
+  },
+  "dependencies": {
+    "core-js": "^0.4.10"
+  }
+}
