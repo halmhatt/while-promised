@@ -20,6 +20,10 @@
   ],
   "author": "Jacob Carlsson <jacob.carlsson@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/halmhatt/while-promised"
+  },
   "devDependencies": {
     "6to5": "^3.4.0",
     "chai": "^1.10.0",
