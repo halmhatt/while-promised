@@ -27,7 +27,7 @@ whilePromised(yourFunction);
 let cnt = 0;
 
 function counter() {
-	return new Promise((resolve, reject) => {
+	return new Promise(function(resolve, reject) {
 		setImmediate(resolve, ++cnt);	
 	});
 }
