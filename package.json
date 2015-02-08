@@ -24,10 +24,8 @@
     "6to5": "^3.4.0",
     "chai": "^1.10.0",
     "chai-as-promised": "^4.1.1",
-    "mocha": "^2.1.0"
-  },
-  "dependencies": {
-    "core-js": "^0.4.10",
+    "mocha": "^2.1.0",
     "es6-promise": "^2.0.1"
-  }
+  },
+  "dependencies": {}
 }

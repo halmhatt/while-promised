@@ -4,8 +4,10 @@ A small library to make *asyncronous loops* for `Promise` based functions.
 
 You could use it as a wrapper to do *polling* or if you would like to loop but the function is asyncronous.
 
-## Usage
+The library is actually not *dependent on any `Promise` implementation* and are only using `.then` of the function you provide, therefore you could use any *thenable* promise. 
 
+## Usage
+Install and check API below
 
 ### Installation
 Install with `npm`. 
