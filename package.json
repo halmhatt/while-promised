@@ -1,7 +1,7 @@
 {
   "name": "while-promised",
   "version": "1.0.0",
-  "description": "Loop asyncronous with Promises",
+  "description": "Loop asyncronously with Promises",
   "main": "index.js",
   "directories": {
     "test": "test"
