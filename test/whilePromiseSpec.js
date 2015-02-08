@@ -1,7 +1,11 @@
-import 'core-js/shim';
-
-import {expect} from 'chai';
+import {Promise} from 'es6-promise';
+import chai from 'chai';
 import whilePromised from '../lib/while-promised';
+import chaiAsPromised from 'chai-as-promised';
+
+let expect = chai.expect;
+
+chai.use(chaiAsPromised);
 
 describe('whilePromised', () => {
 
@@ -21,12 +25,16 @@ describe('whilePromised', () => {
 			});
 		}
 
+		let p = whilePromised(counter);
+
 		// Loop while promise is not returning false
-		return whilePromised(counter)
-			.then(value => {
-				expect(cnt).to.equal(6);
-				expect(value).to.equal(false);
-			});
+		return Promise.all([
+				expect(p).to.not.be.rejected,
+				expect(p).to.be.fulfilled.then((value) => {
+					expect(cnt).to.equal(6);
+					expect(value).to.equal(false);
+				})
+			]);
 	});
 
 	it('should loop while promise does not resolve to value', () => {
@@ -38,12 +46,16 @@ describe('whilePromised', () => {
 			});
 		}
 
+		let p = whilePromised(counter, 6);
+
 		// Loop while resolved value is not 6
-		return whilePromised(counter, 6)
-			.then(value => {
-				expect(cnt).to.equal(6);
-				expect(value).to.equal(6);
-			});
+		return Promise.all([
+				expect(p).not.to.be.rejected,
+				expect(p).to.be.fulfilled.then((value) => {
+					expect(cnt).to.equal(6);
+					expect(value).to.equal(6);
+				})
+			]);
 	});
 
 	it('should loop with compare function', () => {
@@ -60,13 +72,19 @@ describe('whilePromised', () => {
 			});
 		}
 
-		return whilePromised(counter, (value) => {
+		let p = whilePromised(counter, (value) => {
 				return value !== 'done';
-			})
-			.then(value => {
-				expect(cnt).to.equal(4);
-				expect(value).to.equal('done');
 			});
+
+		return Promise.all([
+				expect(p).to.not.be.rejected,
+				expect(p).to.be.fulfilled.then((value) => {
+					expect(value).to.equal('done');
+				}),
+				expect(p).to.be.fulfilled.then(() => {
+					expect(cnt).to.equal(4);
+				})
+			]);
 	});
 
 	it('should stop on reject', () => {
@@ -83,10 +101,14 @@ describe('whilePromised', () => {
 			});
 		}
 
-		return whilePromised(counter)
-			.catch(err => {
-				expect(cnt).to.equal(4);
-				expect(err).to.be.instanceof(Error);
-			});
+		let p = whilePromised(counter);
+
+		return Promise.all([
+				expect(p).to.eventually.be.rejectedWith(Error, 'Stop loop'),
+				expect(p).not.to.be.fulfilled,
+				expect(p).to.be.rejected.then(() => {
+					expect(cnt).to.equal(4)
+				})
+			]);
 	});
 });
