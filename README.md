@@ -1,5 +1,7 @@
 # while promised
 
+![Travis CI status](https://travis-ci.org/halmhatt/while-promised.svg)
+
 A small library to make *asyncronous loops* for `Promise` based functions.
 
 You could use it as a wrapper to do *polling* or if you would like to loop but the function is asyncronous.
